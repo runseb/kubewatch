@@ -9,16 +9,12 @@ import (
         _ "github.com/runseb/kubebot/pkg/services"
 )
 
-const (
-	SlackToken        string = "KUBEBOT_SLACK_TOKEN"
-)
-
 func main() {
 
-	if err := os.Getenv(SlackToken); err == "" {
+	if err := os.Getenv("KUBEBOT_SLACK_TOKEN"); err == "" {
 		fmt.Printf("Missing Slack Token. \n")
 		return
 	}
 
-	slack.Run(os.Getenv(SlackToken))
+	slack.Run(os.Getenv("KUBEBOT_SLACK_TOKEN"))
 }
