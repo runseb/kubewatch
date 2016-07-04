@@ -11,7 +11,7 @@ import (
     client "k8s.io/kubernetes/pkg/client/unversioned"
 )
 
-func ku(command *bot.Cmd) (msg string, err error) {
+func svc(command *bot.Cmd) (msg string, err error) {
 
     config := &restclient.Config{
         Host: "http://localhost:8080",
@@ -30,7 +30,8 @@ func ku(command *bot.Cmd) (msg string, err error) {
         fmt.Println("Port:", s.Spec.Ports[p].Port)
         fmt.Println("NodePort:", s.Spec.Ports[p].NodePort)
     }
-    fmt.Println(s.Spec)
+    fmt.Println("ClusterIP:", s.Spec.ClusterIP)
+    fmt.Println("type:", s.Spec.Type)
     msg = fmt.Sprintln(s.Name)
     return msg, nil
 }
