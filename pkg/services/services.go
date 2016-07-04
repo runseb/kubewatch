@@ -1,4 +1,4 @@
-package main
+package kubebot
 
 import (
     "fmt"
@@ -10,10 +10,6 @@ import (
     "k8s.io/kubernetes/pkg/client/restclient"
     client "k8s.io/kubernetes/pkg/client/unversioned"
 )
-
-type Kubebot struct {
-        token    string
-}
 
 func ku(command *bot.Cmd) (msg string, err error) {
 
@@ -34,14 +30,15 @@ func ku(command *bot.Cmd) (msg string, err error) {
         fmt.Println("Port:", s.Spec.Ports[p].Port)
         fmt.Println("NodePort:", s.Spec.Ports[p].NodePort)
     }
-    msg = fmt.Sprint(s.Name)
+    fmt.Println(s.Spec)
+    msg = fmt.Sprintln(s.Name)
     return msg, nil
 }
 
 func init() {
 	bot.RegisterCommand(
-		"ku",
-		"k8s Slack integration",
+		"svc",
+		"Get k8s Services",
 		"",
-		ku)
+		svc)
 }

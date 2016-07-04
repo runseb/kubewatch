@@ -5,26 +5,20 @@ import (
 	"os"
 
 	"github.com/go-chat-bot/bot/slack"
+
+        _ "github.com/runseb/kubebot/pkg/services"
 )
 
 const (
-	slackTokenLabel        string = "KUBEBOT_SLACK_TOKEN"
-)
-
-var (
-	kb *Kubebot
+	SlackToken        string = "KUBEBOT_SLACK_TOKEN"
 )
 
 func main() {
 
-	if err := os.Getenv(slackTokenLabel); err == "" {
+	if err := os.Getenv(SlackToken); err == "" {
 		fmt.Printf("Missing Slack Token. \n")
 		return
 	}
 
-	kb = &Kubebot{
-		token:    os.Getenv(slackTokenLabel),
-	}
-
-	slack.Run(kb.token)
+	slack.Run(os.Getenv(SlackToken))
 }
