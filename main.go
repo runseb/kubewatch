@@ -1,20 +1,19 @@
 package main
 
 import (
-	"fmt"
-	"os"
+	"log"
 
-	"github.com/go-chat-bot/bot/slack"
+	"k8s.io/kubernetes/pkg/api"
 
-        _ "github.com/runseb/kubewatch/pkg/services"
+	"github.com/runseb/kubewatch/pkg/client"
 )
 
 func main() {
-
-	if err := os.Getenv("KUBEBOT_SLACK_TOKEN"); err == "" {
-		fmt.Printf("Missing Slack Token. \n")
-		return
+	kubeWatchClient, err := client.New()
+	w, err := kubeWatchClient.Events(api.NamespaceAll).Watch(api.ListOptions{Watch: true})
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	slack.Run(os.Getenv("KUBEBOT_SLACK_TOKEN"))
+	kubeWatchClient.EventLoop(w, client.NotifySlack)
 }
