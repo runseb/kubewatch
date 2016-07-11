@@ -6,7 +6,7 @@ import (
 
 	"github.com/go-chat-bot/bot/slack"
 
-        _ "github.com/runseb/kubebot/pkg/services"
+        _ "github.com/runseb/kubewatch/pkg/services"
 )
 
 func main() {
