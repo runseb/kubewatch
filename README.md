@@ -2,6 +2,8 @@
 
 A Slack bot for Kubernetes
 
+# Installation
+
 ```
 mkdir -p $GOPATH/github.com/runseb
 cd $GOPATH/github.com/runseb
@@ -9,10 +11,20 @@ git clone https://github.com/runseb/kubewatch.git
 go install -v github.com/runseb/kubewatch
 ```
 
-Get a SLACK token and set it as env variable
+# Environment variables
+Preparing your SLACK token, channel.
 
 ```
-export HUBOT_SLACK_TOKEN=587234592734598
+export KW_SLACK_TOKEN='XXXXXXXXXXXXXXXX'
+export KW_SLACK_CHANNEL='#channel_name'
 ```
 
-Then run `kubebot`
+# Run
+
+```
+"$GOPATH"/bin/kubewatch
+```
+
+# Notes
+
+For now, `kubewatch` watches the `kube-apiserver` on localhost only.
